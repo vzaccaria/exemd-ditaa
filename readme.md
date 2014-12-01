@@ -1,11 +1,11 @@
-# exemd-dot [![NPM version](https://badge.fury.io/js/exemd-dot.svg)](http://badge.fury.io/js/exemd-dot)
+# exemd-ditaa [![NPM version](https://badge.fury.io/js/exemd-ditaa.svg)](http://badge.fury.io/js/exemd-ditaa)
 
-> Dot driver for `exemd`
+> Ditaa driver for `exemd`
 
 ## Install globally with [npm](npmjs.org):
 
 ```bash
-npm i -g exemd-dot
+npm i -g exemd-ditaa
 ```
 
 ## Options
