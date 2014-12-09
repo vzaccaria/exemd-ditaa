@@ -8,6 +8,8 @@ _module = ->
     process = (block, opts) ->
       new Promise (resolve, preject) ->
 
+        params ?= opts.params
+
         if opts.target-mode != "pdf"
 
               temp-file = "#{opts.tmpdir}/#{uid(7)}"

@@ -9,7 +9,8 @@
     var process, iface;
     process = function(block, opts){
       return new Promise(function(resolve, preject){
-        var tempFile, cmd;
+        var params, tempFile, cmd;
+        params == null && (params = opts.params);
         if (opts.targetMode !== "pdf") {
           tempFile = opts.tmpdir + "/" + uid(7);
           block.to(tempFile);
