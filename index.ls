@@ -3,34 +3,31 @@ Promise = require('bluebird')
 {exec}  = require('shelljs')
 uid     = require('uid')
 
+
+
+
 _module = ->
 
     process = (block, opts) ->
-      new Promise (resolve, preject) ->
 
-        params ?= opts.params
+      default-is-png = { 
 
-        if opts.target-mode != "pdf"
+         cmd: (block, tmp-file, tmp-dir) -> 
+            block.to("#tmp-dir/#tmp-file")
+            return "ditaa #tmp-dir/#tmp-file > /dev/null && cat #tmp-dir/#tmp-file.png | base64"
+            
+         output: (tmp-file, tmp-dir, output) -> '\n <img class="exemd--diagram exemd--diagram__ditaa" src="data:image/png;base64,' + output + '" /> \n' 
+         }
 
-              temp-file = "#{opts.tmpdir}/#{uid(7)}"
-              block.to(temp-file)
-              cmd = "ditaa #temp-file > /dev/null && cat #temp-file.png | base64"
-              exec cmd, {+async, +silent}, (code, output) ->
-                output = '\n <img src="data:image/png;base64,' + output + '" /> \n'
+      targets = {
+        default: default-is-png
+        png: default-is-png
+      }
 
-                if not code
-                    resolve(output)
-
-                else
-                    resolve("```{ditaa #params}#block```")
-
-        else
-          resolve("```{ditaa #params}#block```")
+      opts.plugin-template(targets, block, opts)
 
     iface = {
-
       process: process
-
     }
               
     return iface

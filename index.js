@@ -8,28 +8,21 @@
   _module = function(){
     var process, iface;
     process = function(block, opts){
-      return new Promise(function(resolve, preject){
-        var params, tempFile, cmd;
-        params == null && (params = opts.params);
-        if (opts.targetMode !== "pdf") {
-          tempFile = opts.tmpdir + "/" + uid(7);
-          block.to(tempFile);
-          cmd = "ditaa " + tempFile + " > /dev/null && cat " + tempFile + ".png | base64";
-          return exec(cmd, {
-            async: true,
-            silent: true
-          }, function(code, output){
-            output = '\n <img src="data:image/png;base64,' + output + '" /> \n';
-            if (!code) {
-              return resolve(output);
-            } else {
-              return resolve("```{ditaa " + params + "}" + block + "```");
-            }
-          });
-        } else {
-          return resolve("```{ditaa " + params + "}" + block + "```");
+      var defaultIsPng, targets;
+      defaultIsPng = {
+        cmd: function(block, tmpFile, tmpDir){
+          block.to(tmpDir + "/" + tmpFile);
+          return "ditaa " + tmpDir + "/" + tmpFile + " > /dev/null && cat " + tmpDir + "/" + tmpFile + ".png | base64";
+        },
+        output: function(tmpFile, tmpDir, output){
+          return '\n <img class="exemd--diagram exemd--diagram__ditaa" src="data:image/png;base64,' + output + '" /> \n';
         }
-      });
+      };
+      targets = {
+        'default': defaultIsPng,
+        png: defaultIsPng
+      };
+      return opts.pluginTemplate(targets, block, opts);
     };
     iface = {
       process: process
