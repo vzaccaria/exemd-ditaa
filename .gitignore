@@ -1,8 +1,5 @@
-
-x.dot
-
-x.html
-
-x.png
-
-z.html
+node_modules
+lib
+makefile
+docs/exemd-ditaa.png
+src/source.png

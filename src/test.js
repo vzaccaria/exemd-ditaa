@@ -30,24 +30,6 @@ describe('#module', () => {
 
 describe('#getTargets', () => {
   "use strict"
-  it('should generate an svg file', () => {
-
-    var {
-      cmd, output
-    } = require('..').getTargets().svg
-
-    should.exist(cmd)
-    should.exist(output)
-
-    var cc = cmd(dotFile, "tmp", ".", "opts")
-    var o = output("tmp", ".", "tst")
-
-    cc.should.be.equal("dot -Tsvg opts \'./tmp.dot\'")
-    o.should.be.equal("tst")
-
-    rm("-f", "./tmp.dot")
-  })
-
   it('should generate a png file', () => {
 
     var {
@@ -60,27 +42,9 @@ describe('#getTargets', () => {
     var cc = cmd(dotFile, "tmp", ".", "opts")
     var o = output("tmp", ".", "tst")
 
-    cc.should.be.equal("dot -Tpng opts \'./tmp.dot\' | base64")
-    o.should.be.equal(`\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,tst" /> \n`)
+    cc.should.be.equal("ditaa \'tmp\' > /dev/null && cat \'tmp.png\' | base64")
+    o.should.be.equal(`\n <img class="exemd--diagram exemd--diagram__ditaa" src="data:image/png;base64,tst" /> \n`)
 
-    rm("-f", "./tmp.dot")
-  })
-
-  it('should generate a pdf file', () => {
-
-    var {
-      cmd, output
-    } = require('..').getTargets().pdf
-
-    should.exist(cmd)
-    should.exist(output)
-
-    var cc = cmd(dotFile, "tmp", ".", "opts")
-    var o = output("tmp", ".", "tst")
-
-    cc.should.be.equal(`dot -Tsvg opts \'./tmp.dot\' > \'./tmp.svg\' && mkdir -p \'./figures\' && cat \'./tmp.svg\' | rsvg-convert -z 0.5 -f pdf > \'./figures/f-dot-0.pdf\' && echo \'./figures/f-dot-0.pdf\'`)
-    o.should.be.equal(`![](tst)`)
-
-    rm("-f", "./tmp.dot")
+    rm("-f", "./tmp")
   })
 })

@@ -7,9 +7,11 @@ Ditaa diagrams in markdown files.
 Short help
 ----------
 
-[Ditaa](http://ditaa.sourceforge.net/)  is:
+[Ditaa](http://ditaa.sourceforge.net/) is:
 
-> ... a small command-line utility written in Java, that can convert diagrams drawn using ascii art ('drawings' that contain characters that resemble lines like | / - ). into proper bitmap graphics
+> ... a small command-line utility written in Java, that can convert
+> diagrams drawn using ascii art ('drawings' that contain characters
+> that resemble lines like | / - ). into proper bitmap graphics
 
 You can use Ditaa in this way:
 
@@ -27,4 +29,10 @@ You can use Ditaa in this way:
 
 That is converted to this picture:
 
-![](https://dl.dropboxusercontent.com/u/5867765/tools/exemd/exemd-dot.png)
+![](https://dl.dropboxusercontent.com/u/5867765/tools/exemd/exemd-ditaa.png)
+
+Note
+----
+
+You can only use this plugin with exemd's `-g` option to produce a PNG.
+No SVG or PDF is supported at the moment.

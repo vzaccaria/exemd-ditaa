@@ -32,7 +32,10 @@ generateProject(_ => {
   })
 
   _.collect("docs", _ => {
-    _.cmd("`ditaa ./src/source.dia > /dev/null && cp ./src/source.png docs/exemd-ditaa.png")
+    _.verb("./verbfile.js", "docs/*.md")
+    _.cmd("rm src/*.png")
+    _.cmd("ditaa ./src/source.dia > /dev/null && cp ./src/source.png docs/exemd-ditaa.png")
+    _.cmd("cp docs/exemd-ditaa.png ~/Dropbox/Public/tools/exemd")
   })
 
   _.collect("update", _ => {

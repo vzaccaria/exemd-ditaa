@@ -1,19 +1,12 @@
 # {%= name %} {%= badge("fury") %}
 
-> {%= description %}
-
 {%= include("install-global") %}
 
-## Additional installs
-
-Install `ditaa` before this plugin.
-
-## Options
-
-* No options at the moment.
+{%= partial("description.md") %}
 
 ## Author
-{%= include("author") %}
+
+* Vittorio Zaccaria
 
 ## License
 {%= copyright() %}

@@ -7,11 +7,6 @@ var plainCmd = (file, type) => {
 }
 
 
-var generateSvg = () => {
-  "use strict"
-  throw "Svg generation not available for this plugin."
-}
-
 var generatePng = () => {
   "use strict"
   return {
@@ -26,10 +21,6 @@ var generatePng = () => {
   }
 }
 
-var generatePdf = () => {
-  "use strict"
-  throw "Pdf generation not available for this plugin."
-}
 
 
 var _module = () => {
@@ -37,9 +28,6 @@ var _module = () => {
 
   var getTargets = () => {
     var targets = {
-      default: generateSvg(),
-      svg: generateSvg(),
-      pdf: generatePdf(),
       png: generatePng()
     }
     return targets
