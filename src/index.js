@@ -1,9 +1,9 @@
 require('shelljs')
 
 
-var plainCmd = (file, type) => {
+var plainCmd = (file, dir, type) => {
   "use strict"
-  return `ditaa '${file}' > /dev/null && cat '${file}.${type}'`
+  return `ditaa '${dir}/${file}' > /dev/null && cat '${dir}/${file}.${type}'`
 }
 
 
@@ -13,7 +13,7 @@ var generatePng = () => {
     cmd: (block, file, dir, params) => {
       var fn = `${dir}/${file}`
       block.to(fn)
-      return `${plainCmd(file, "png")} | base64`
+      return `${plainCmd(file, dir, "png")} | base64`
     },
     output: (file, dir, output) => {
       return `\n <img class="exemd--diagram exemd--diagram__ditaa" src="data:image/png;base64,${output}" /> \n`;
@@ -28,6 +28,7 @@ var _module = () => {
 
   var getTargets = () => {
     var targets = {
+      "default": generatePng(),
       png: generatePng()
     }
     return targets

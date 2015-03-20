@@ -2,9 +2,9 @@
 
 require("shelljs");
 
-var plainCmd = function (file, type) {
+var plainCmd = function (file, dir, type) {
   "use strict";
-  return "ditaa '" + file + "' > /dev/null && cat '" + file + "." + type + "'";
+  return "ditaa '" + dir + "/" + file + "' > /dev/null && cat '" + dir + "/" + file + "." + type + "'";
 };
 
 var generatePng = function () {
@@ -13,7 +13,7 @@ var generatePng = function () {
     cmd: function (block, file, dir, params) {
       var fn = "" + dir + "/" + file;
       block.to(fn);
-      return "" + plainCmd(file, "png") + " | base64";
+      return "" + plainCmd(file, dir, "png") + " | base64";
     },
     output: function (file, dir, output) {
       return "\n <img class=\"exemd--diagram exemd--diagram__ditaa\" src=\"data:image/png;base64," + output + "\" /> \n";
@@ -26,6 +26,7 @@ var _module = function () {
 
   var getTargets = function () {
     var targets = {
+      "default": generatePng(),
       png: generatePng()
     };
     return targets;

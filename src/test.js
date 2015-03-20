@@ -42,7 +42,7 @@ describe('#getTargets', () => {
     var cc = cmd(dotFile, "tmp", ".", "opts")
     var o = output("tmp", ".", "tst")
 
-    cc.should.be.equal("ditaa \'tmp\' > /dev/null && cat \'tmp.png\' | base64")
+    cc.should.be.equal("ditaa \'./tmp\' > /dev/null && cat \'./tmp.png\' | base64")
     o.should.be.equal(`\n <img class="exemd--diagram exemd--diagram__ditaa" src="data:image/png;base64,tst" /> \n`)
 
     rm("-f", "./tmp")
